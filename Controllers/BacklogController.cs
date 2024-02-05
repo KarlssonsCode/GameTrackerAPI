@@ -30,5 +30,20 @@ namespace GameTrackerAPI.Controllers
              await _backlogManager.AddGameToBacklog(backlog);
         }
 
+        [HttpDelete("DeleteBacklogGame/{GameId}")]
+        public async Task<IActionResult> RemoveBacklogGame(int gameId)
+        {
+            try
+            {
+                await _backlogManager.DeleteBacklogGame(gameId);
+                return Ok(); 
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Internal server error: {ex.Message}");
+            }
+        }
+
+
     }
 }
